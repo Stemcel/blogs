@@ -50,6 +50,7 @@ class AdminController extends Controller
                     Auth::setToken($user->last_token)->invalidate();
                 } catch (TokenExpiredException $e) {
                     //因为让一个过期的token再失效，会抛出异常，所以我们捕捉异常，不需要做任何处理
+
                 }
             }
             $user->last_token = $token;

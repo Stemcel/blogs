@@ -15,14 +15,10 @@ class UserController extends Controller
     //返回用户列表
     public function index()
     {
-        if (Auth::guest()) {
-            return $this->failed('未登录');
-        } else {
-            //3个用户为一页
-            $users = User::paginate(3);
-            // return $this->success($users);
-            return UserResource::collection($users);
-        }
+        //3个用户为一页
+        $users = User::paginate(3);
+        // return $this->success($users);
+        return UserResource::collection($users);
     }
     //返回单一用户信息
     public function show(User $user)

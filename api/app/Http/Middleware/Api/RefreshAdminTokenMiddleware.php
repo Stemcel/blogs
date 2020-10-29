@@ -39,7 +39,6 @@ class RefreshAdminTokenMiddleware extends BaseMiddleware
 
         //获取当前token
         $token = Auth::getToken();
-
         //即使过期了，也能获取到token里的 载荷 信息。
         $payload = Auth::manager()->getJWTProvider()->decode($token->get());
 
