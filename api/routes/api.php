@@ -47,4 +47,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
             Route::get('/admins/logout', 'AdminController@logout')->name('admins.logout');
         });
     });
+
+    // Route::resource('photos', PhotoController::class);
 });

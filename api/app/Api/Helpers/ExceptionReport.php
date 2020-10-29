@@ -61,7 +61,6 @@ class ExceptionReport
 
     public function register($className, callable $callback)
     {
-
         $this->doReport[$className] = $callback;
     }
 
@@ -91,7 +90,6 @@ class ExceptionReport
      */
     public static function make(Exception $e)
     {
-
         return new static(\request(), $e);
     }
 
