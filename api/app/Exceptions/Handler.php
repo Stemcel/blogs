@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Api\Helpers\ExceptionReport;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class Handler extends ExceptionHandler
 {
@@ -15,6 +16,7 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //
+        TokenExpiredException::class
     ];
 
     /**
