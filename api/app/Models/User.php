@@ -56,20 +56,4 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
-    /**
-     * rbac相关接口roles()、hasRole($name)、can($permission)以及ability($roles,$permissions,$options)
-     */
-    // public function roles()
-    // {
-    // }
-    // public function hasRole($name)
-    // {
-    // }
-    // public function can($permission)
-    // {
-    // }
-    // public function ability($roles, $permissions, $options)
-    // {
-    // }
 }
