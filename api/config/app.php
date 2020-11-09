@@ -180,6 +180,11 @@ return [
          */
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
+        /**
+         * Entrust rbac
+         */
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
 
     ],
 
@@ -230,6 +235,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /**
+         * Entrust
+         */
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

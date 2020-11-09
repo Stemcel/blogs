@@ -13,7 +13,8 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "medz/cors": "^1.5",
-        "tymon/jwt-auth": "1.0.0-rc.3"
+        "tymon/jwt-auth": "1.0.0-rc.3",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
