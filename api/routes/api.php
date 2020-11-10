@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 /*
@@ -29,6 +30,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
             //用户退出
             Route::get('/logout', 'UserController@logout')->name('users.logout');
 
+
+            //上传文件
+            Route::post('/upload', 'Common\UploadController@uploadFile')->name('users.uploadFile');
 
             //测试
             Route::get('/test', 'RbacTestController@test')->name('users.test');

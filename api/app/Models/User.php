@@ -11,7 +11,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-    use EntrustUserTrait;
+    //use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *

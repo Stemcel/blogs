@@ -42,7 +42,6 @@ class RefreshTokenMiddleware extends BaseMiddleware
 
         //即使过期了，也能获取到token里的 载荷 信息。
         $payload = Auth::manager()->getJWTProvider()->decode($token->get());
-
         //如果不包含guard字段或者guard所对应的值与当前的guard守护值不相同
         //证明是不属于当前guard守护的token
         if (empty($payload['guard']) || $payload['guard'] != $present_guard) {
@@ -55,6 +54,7 @@ class RefreshTokenMiddleware extends BaseMiddleware
             if ($this->auth->parseToken()->authenticate()) {
                 return $next($request);
             }
+            
             throw new UnauthorizedHttpException('jwt-auth', '未登录');
         } catch (TokenExpiredException $exception) {
             // 3. 此处捕获到了 token 过期所抛出的 TokenExpiredException 异常，我们在这里需要做的是刷新该用户的 token 并将它添加到响应头中
