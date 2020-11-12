@@ -46,7 +46,7 @@ class UserController extends Controller
                 } catch (TokenExpiredException $e) {
                     //因为让一个过期的token再失效，会抛出异常，所以我们捕捉异常，不需要做任何处理
                 }
-            }
+            }       
             $user->last_token = $token;
             $user->save();
             return $this->setStatusCode(201)->success(['token' => 'bearer ' . $token]);
