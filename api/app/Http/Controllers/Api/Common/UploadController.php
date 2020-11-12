@@ -19,4 +19,5 @@ class UploadController extends Controller
         $user = Auth::user();
         return $this->success(new UserResource($user));
     }
+    
 }
