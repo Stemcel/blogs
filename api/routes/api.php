@@ -30,7 +30,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
             Route::get('/logout', 'UserController@logout')->name('users.logout');
 
             //上传
-            Route::post('/upload','Common\UploadController@upload')->name('users.upload');
+            Route::post('/uploadFile','Common\UploadController@uploadFile')->name('users.uploadFile');
         });
     });
 
