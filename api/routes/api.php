@@ -28,6 +28,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
             Route::get('/users/{user}', 'UserController@show')->name('users.show');
             //用户退出
             Route::get('/logout', 'UserController@logout')->name('users.logout');
+
+            //上传
+            Route::post('/uploadFile','Common\UploadController@uploadFile')->name('users.uploadFile');
         });
     });
 
