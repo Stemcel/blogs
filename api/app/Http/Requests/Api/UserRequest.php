@@ -19,7 +19,6 @@ class UserRequest extends FormRequest
 
     public function rules()
     {
-
         switch ($this->method()) {
             case 'GET': {
                     return [
@@ -29,7 +28,9 @@ class UserRequest extends FormRequest
             case 'POST': {
                     return [
                         'name' => ['required', 'max:12', 'unique:users,name'],
-                        'password' => ['required', 'max:16', 'min:6']
+                        'password' => ['required', 'max:16', 'min:6','confirmed'],
+                        'password_confirmation' => ['required'],
+                        'email' => ['required', 'email','unique:users,email']
                     ];
                 }
             case 'PUT':
@@ -54,7 +55,12 @@ class UserRequest extends FormRequest
             'name.max' => '用户名最大长度为12个字符',
             'password.required' => '密码不能为空',
             'password.max' => '密码长度不能超过16个字符',
-            'password.min' => '密码长度不能小于6个字符'
+            'password.min' => '密码长度不能小于6个字符',
+            'password_confirmation.required' => '验证密码不能为空',
+            'password.confirmed' => '两次密码不一致',
+            'email.required' => '邮箱不能为空',
+            'email.email' => '邮箱格式有误',
+            'email.unique' => '邮箱已经存在',
         ];
     }
     /**
