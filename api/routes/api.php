@@ -31,6 +31,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
             //上传
             Route::post('/uploadFile','Common\UploadController@uploadFile')->name('users.uploadFile');
+
+            //帖子上传
+            Route::post('/posts','Post\PostController@store')->name('posts.store');
         });
     });
 
