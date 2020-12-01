@@ -38,7 +38,6 @@ trait ApiResponse
      */
     public function respond($data, $header = [])
     {
-
         return Response::json($data, $this->getStatusCode(), $header);
     }
 
