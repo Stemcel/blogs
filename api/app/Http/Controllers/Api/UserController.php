@@ -19,7 +19,6 @@ class UserController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
-        $check_password = $request->check_password;
         $admin = User::create([
             'name' => $name,
             'email' => $email,
