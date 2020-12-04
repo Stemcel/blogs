@@ -57,7 +57,7 @@
       <!-- <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span>password: any</span>
-      </div> -->
+      </div>-->
     </el-form>
   </div>
 </template>
@@ -126,7 +126,7 @@ export default {
           this.$store
             .dispatch("user/login", this.loginForm)
             .then(() => {
-              // this.$router.push({ path: this.redirect || "/" });
+              this.$router.push({ path: this.redirect || "/" });
               this.loading = false;
             })
             .catch(() => {
