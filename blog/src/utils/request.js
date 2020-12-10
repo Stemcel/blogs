@@ -38,6 +38,7 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['Authorization'] = getToken()
     }
+    config.headers['X-Requested-With'] = 'XMLHttpRequest'
     return config
   },
   error => {
@@ -62,58 +63,50 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 200 && response.status !== 200) {
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(res.message || 'Error'))
-    } else {
-      return res
-    }
+    // if (res.code !== 200 && response.status !== 200) {
+    //   // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+    //   if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+    //     // to re-login
+    //     MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+    //       confirmButtonText: 'Re-Login',
+    //       cancelButtonText: 'Cancel',
+    //       type: 'warning'
+    //     }).then(() => {
+    //       store.dispatch('user/resetToken').then(() => {
+    //         location.reload()
+    //       })
+    //     })
+    //   }
+    //   return Promise.reject(new Error(res.message || 'Error'))
+    // } else {
+    //   return res
+    // }
+    return res
   },
   error => {
     // console.log(JSON.stringify(error)) // for debug
     if (error === undefined || error.code === 'ECONNABORTED') {
-      message.warning('服务请求超时')
+      Message.warning('服务请求超时')
       return Promise.reject(error)
     }
     const { response: { status, statusText, data: { msg = '服务器发生错误' } } } = error
     const { response } = error
     const { dispatch } = store
     const text = codeMessage[status] || statusText || msg
-    if (status === 400) {
-      // message.warning('账户或密码错误！')
-      Message.warning({
-        title: '失败',
-        message: response.data.message,
-        type: 'error',
-        duration: 2 * 1000,
-      })
-    }
     const info = response.data
-    if (status === 401 || info.status === 40101) {
+    if (status === 401 || info.code === 401) {
       dispatch({
         type: 'login/logout',
       })
-      // MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-      //     confirmButtonText: '重新登录',
-      //     cancelButtonText: '取消',
-      //     type: 'warning',
-      // }).then(() => {
-      //     store.dispatch('LogOut').then(() => {
-      //         location.reload() // 为了重新实例化vue-router对象 避免bug
-      //     })
-      // })
+      MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(() => {
+        store.dispatch('LogOut').then(() => {
+          location.reload() // 为了重新实例化vue-router对象 避免bug
+        })
+      })
     }
     if (status === 403) {
       dispatch(routerRedux.push('/exception/403'))
@@ -124,7 +117,7 @@ service.interceptors.response.use(
       //     duration: 2 * 1000,
       // })
     }
-    if (info.status === 30101) {
+    if (info.code === 30101) {
       dispatch(routerRedux.push('/exception/500'))
       // Notification.warning({
       //     title: '失败',
@@ -141,7 +134,7 @@ service.interceptors.response.use(
       //     duration: 5 * 1000,
       // })
     }
-    message.error(`${status}:${text}`)
+    Message.error(`${status}:${text}`)
     // throw error
     // return error
     return Promise.reject(error)
