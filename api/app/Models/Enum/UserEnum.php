@@ -13,11 +13,11 @@ class UserEnum
     {
         switch ($status) {
             case self::INVALID:
-                return '已删除';
+                return 'deleted';
             case self::NORMAL:
-                return '正常';
+                return 'published';
             case self::FREEZE:
-                return '冻结';
+                return 'draft';
             default:
                 return '正常';
         }
