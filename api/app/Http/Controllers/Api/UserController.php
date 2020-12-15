@@ -63,10 +63,11 @@ class UserController extends Controller
 
 
     //返回用户列表
-    public function index()
+    public function index(Request $request)
     {
+        $limit = $request->limit ?? 10;
         //3个用户为一页
-        $users = User::paginate(3);
+        $users = User::where('status', '<=', 1)->paginate($limit);
         // return $this->success($users);
         return UserResource::collection($users);
     }

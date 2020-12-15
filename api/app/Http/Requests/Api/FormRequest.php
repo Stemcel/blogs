@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest as OrgFormRequest;
 
-class FormRequest extends FormRequest
+class FormRequest extends OrgFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

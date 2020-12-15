@@ -15,6 +15,10 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+//全局分页组件
+import pagination from '@/components/Pagination/pagination.vue'
+Vue.component('pagination',pagination)
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
