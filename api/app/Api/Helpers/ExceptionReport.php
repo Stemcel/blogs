@@ -57,6 +57,7 @@ class ExceptionReport
         NotFoundHttpException::class => ['没有找到该页面', 404],
         MethodNotAllowedHttpException::class => ['访问方式不正确', 405],
         QueryException::class => ['参数错误', 401],
+        TokenExpiredException::class => ['toke过期', 401],
     ];
 
     public function register($className, callable $callback)
